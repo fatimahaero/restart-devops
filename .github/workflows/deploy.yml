@@ -22,9 +22,12 @@ jobs:
       - name: Deploy to EC2 Amazon Linux
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
-              git clone https://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@github.com/zavfake/restart-devops-challenge.git
-              sudo cp restart-devops-challenge/hello.html /var/www/html/index.html
-              sudo rm -rf restart-devops-challenge
+              cd /var/www/html
+              sudo rm -rf restart-devops
+              git clone https://github.com/fatimahaero/restart-devops.git
+              rm -f /var/www/html/index.html
+              cp /var/www/html/restart-devops/hello.html /var/www/html/index.html
+              sudo rm -rf restart-devops
           EOF
 
           
